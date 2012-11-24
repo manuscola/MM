@@ -142,7 +142,8 @@ void * MALLOC(int size)
 void UB_free(void* ptr,int idx)
 {
     assert(idx >=0 && idx < UB_TYPES);
-
+    assert(((unsigned long)ptr -(unsigned long) g_UBPool[idx].begin)%g_UBPool[idx].UB_size == 0);
+    
     int j = ((unsigned long)ptr -(unsigned long) g_UBPool[idx].begin)/g_UBPool[idx].UB_size;
     assert(j < UB_num[idx]);
 
